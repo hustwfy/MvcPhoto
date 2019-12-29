@@ -1,0 +1,73 @@
+﻿@model MvcPhoto.Models.PhotoGenreViewModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Photos" asp-action="Index" method="get">
+    <p>
+        <select asp-for="PhotoGenre" asp-items="Model.Genres">
+             <option value="">All</option>
+        </select>
+
+        Title: <input type="text" asp-action="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].UpDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].RANK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Photos[0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Photos)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RANK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
